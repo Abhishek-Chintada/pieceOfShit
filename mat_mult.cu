@@ -39,6 +39,11 @@ void MatrixMultiplication_Revised(int* arr1, int* arr2, int* pro, size_t size) {
     cudaMemcpy(arr2d, arr2, arr_bytes, cudaMemcpyHostToDevice);
     cudaMalloc((void**)&prod, arr_bytes);
 
+    // Calculations
+    dim3 dimBlock(size, size);
+    dim3 dimGrid(1, 1);
+    MatrixMultiplicationKernel<<<dimGrid, dimBlock>>>(arr1d, arr2d, prod, size);
+
     cudaMemcpy(pro, prod, arr_bytes, cudaMemcpyDeviceToHost);
     cudaFree(arr1d); cudaFree(arr2d); cudaFree(prod);
 }
@@ -46,9 +51,15 @@ void MatrixMultiplication_Revised(int* arr1, int* arr2, int* pro, size_t size) {
 // matrix multiplication kernel here.
 __global__ void MatrixMultiplicationKernel(int *arr1d, int *arr2d, int *prod, size_t size) {
     auto tx = threadIdx.x;
-    auto ty = threadIdx.y;
-    
+    auto ty = threadIdx.y;  // tx -> i and ty -> j
+    int Pvalue = 0;
 
+    for(int k{}; k < size; k++) {
+        auto a = arr1d[tx*size + k];
+        auto b = arr2d[k*size + ty];
+        Pvalue += a*b;
+    }
+    prod[tx*size + ty] = Pvalue;
 }
 
 int main(void) {
@@ -69,8 +80,14 @@ int main(void) {
     print_arr(arr1, size);
     print_arr(arr2, size);
     // Carry out the multiplication.
-    MatrixMultiplication(arr1, arr2, product, size);
-    print_arr(product, size); // Printing the product here. 
+    
+    /*MatrixMultiplication(arr1, arr2, product, size);
+    print_arr(product, size); // Printing the product here. */
+
+
+    // Enter the device T4.
+    MatrixMultiplication_Revised(arr1, arr2, product, size);
+
     free(arr1);
     free(arr2);
     return 0;
