@@ -86,11 +86,15 @@ int main(void) {
     MatrixMultiplication(arr1, arr2, product, size);
     print_arr(product, size); // Printing the product here.
     auto end_time = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::milli> time = start_time - end_time;
+    std::chrono::duration<double, std::milli> time = end_time - start_time;
     printf("This the time taken for normal execution : %lf\n", time.count());
 
     // Enter the device T4.
+    auto st = std::chrono::high_resolution_clock::now();
     MatrixMultiplication_Revised(arr1, arr2, product, size);
+    auto en = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> t = en - st;
+    printf("This is the time taken for the execution on GPU : %lf\n", t.count());
 
     free(arr1);
     free(arr2);
