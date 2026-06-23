@@ -65,7 +65,6 @@ void MatrixMultiplication_Revised(int* arr1, int* arr2, int* pro, size_t size) {
 
 
 int main(void) {
-    auto start_time = std::chrono::high_resolution_clock::now();
     std::random_device rd; // Obtain a seed from hardware.
     std::mt19937 gen(rd());
     size_t size = 3; // size of the matrix
@@ -82,10 +81,13 @@ int main(void) {
     print_arr(arr1, size);
     print_arr(arr2, size);
     // Carry out the multiplication.
-    
-    /*MatrixMultiplication(arr1, arr2, product, size);
-    print_arr(product, size); // Printing the product here. */
 
+    auto start_time = std::chrono::high_resolution_clock::now();
+    MatrixMultiplication(arr1, arr2, product, size);
+    print_arr(product, size); // Printing the product here.
+    auto end_time = std::chrono::high_resolution_clock::now();
+    std::chrono:duration<double, std::milli> time = start - end;
+    printf("This the time taken for normal execution : %lf\n", time);
 
     // Enter the device T4.
     MatrixMultiplication_Revised(arr1, arr2, product, size);
