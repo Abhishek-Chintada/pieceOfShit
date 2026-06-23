@@ -33,17 +33,22 @@ void MatrixMultiplication(int* arr1, int* arr2, int* pro, int size) {
 void MatrixMultiplication_Revised(int* arr1, int* arr2, int* pro, size_t size) {
     auto arr_bytes = size*size*sizeof(int);
     int *arr1d, *arr2d, *prod;
-    cudaMalloc((void**)arr1d, arr_bytes);
+    cudaMalloc((void**)&arr1d, arr_bytes);
     cudaMemcpy(arr1d, arr1, arr_bytes, cudaMemcpyHostToDevice);
-    cudaMalloc((void**)arr2d, arr_bytes);
+    cudaMalloc((void**)&arr2d, arr_bytes);
     cudaMemcpy(arr2d, arr2, arr_bytes, cudaMemcpyHostToDevice);
-    cudaMalloc((void**)prod, arr_bytes);
-    cudaMemcpy(prod, pro, arr_bytes, cudaMemcpyHostToDevice);
+    cudaMalloc((void**)&prod, arr_bytes);
 
+    cudaMemcpy(pro, prod, arr_bytes, cudaMemcpyDeviceToHost);
+    cudaFree(arr1d); cudaFree(arr2d); cudaFree(prod);
+}
 
-    cudaFree(arr1d);
-    cudaFree(arr2d);
-    cudaFree(prod);
+// matrix multiplication kernel here.
+__global__ void MatrixMultiplicationKernel(int *arr1d, int *arr2d, int *prod, size_t size) {
+    auto tx = threadIdx.x;
+    auto ty = threadIdx.y;
+    
+
 }
 
 int main(void) {
