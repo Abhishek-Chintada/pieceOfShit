@@ -67,7 +67,7 @@ void MatrixMultiplication_Revised(int* arr1, int* arr2, int* pro, size_t size) {
 int main(void) {
     std::random_device rd; // Obtain a seed from hardware.
     std::mt19937 gen(rd());
-    size_t size = 3; // size of the matrix
+    size_t size = 32; // size of the matrix
     std::uniform_int_distribution<int>random(1, 10);
     int* arr1 = (int *)malloc(size*size*sizeof(int)); // dynamically allocating an array.
     int* arr2 = (int *)malloc(size*size*sizeof(int));
