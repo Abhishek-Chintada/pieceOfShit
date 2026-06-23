@@ -3,6 +3,21 @@
 #include <chrono>
 #include <random>
 
+// matrix multiplication kernel here.
+__global__ void MatrixMultiplicationKernel(int *arr1d, int *arr2d, int *prod, size_t size) {
+    auto tx = threadIdx.x;
+    auto ty = threadIdx.y;  // tx -> i and ty -> j
+    int Pvalue = 0;
+
+    for(int k{}; k < size; k++) {
+        auto a = arr1d[tx*size + k];
+        auto b = arr2d[k*size + ty];
+        Pvalue += a*b;
+    }
+    prod[tx*size + ty] = Pvalue;
+}
+
+
 void print_arr(int* arr, size_t size) {
     printf("[");
     for(size_t i{}; i < size; i++) {
@@ -48,19 +63,6 @@ void MatrixMultiplication_Revised(int* arr1, int* arr2, int* pro, size_t size) {
     cudaFree(arr1d); cudaFree(arr2d); cudaFree(prod);
 }
 
-// matrix multiplication kernel here.
-__global__ void MatrixMultiplicationKernel(int *arr1d, int *arr2d, int *prod, size_t size) {
-    auto tx = threadIdx.x;
-    auto ty = threadIdx.y;  // tx -> i and ty -> j
-    int Pvalue = 0;
-
-    for(int k{}; k < size; k++) {
-        auto a = arr1d[tx*size + k];
-        auto b = arr2d[k*size + ty];
-        Pvalue += a*b;
-    }
-    prod[tx*size + ty] = Pvalue;
-}
 
 int main(void) {
     auto start_time = std::chrono::high_resolution_clock::now();
