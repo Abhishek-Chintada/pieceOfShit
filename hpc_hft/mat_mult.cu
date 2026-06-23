@@ -87,7 +87,7 @@ int main(void) {
     print_arr(product, size); // Printing the product here.
     auto end_time = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> time = start_time - end_time;
-    printf("This the time taken for normal execution : %lf\n", time);
+    printf("This the time taken for normal execution : %lf\n", time.count());
 
     // Enter the device T4.
     MatrixMultiplication_Revised(arr1, arr2, product, size);
