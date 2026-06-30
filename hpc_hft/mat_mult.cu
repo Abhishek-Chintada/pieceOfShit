@@ -3,7 +3,7 @@
 #include <chrono>
 #include <random>
 
-// matrix multiplication kernel here.
+// kernel starts.
 __global__ void MatrixMultiplicationKernel(int *arr1d, int *arr2d, int *prod, size_t size) {
     auto tx = threadIdx.x;
     auto ty = threadIdx.y;  // tx -> i and ty -> j
@@ -16,8 +16,9 @@ __global__ void MatrixMultiplicationKernel(int *arr1d, int *arr2d, int *prod, si
     }
     prod[tx*size + ty] = Pvalue;
 }
+// kernel ends.
 
-
+// Host starts.
 void print_arr(int* arr, size_t size) {
     printf("[");
     for(size_t i{}; i < size; i++) {
@@ -45,6 +46,9 @@ void MatrixMultiplication(int* arr1, int* arr2, int* pro, int size) {
     }
 }
 
+// Host ends.
+
+// Host callee starts.
 void MatrixMultiplication_Revised(int* arr1, int* arr2, int* pro, size_t size) {
     auto arr_bytes = size*size*sizeof(int);
     int *arr1d, *arr2d, *prod;
@@ -62,8 +66,9 @@ void MatrixMultiplication_Revised(int* arr1, int* arr2, int* pro, size_t size) {
     cudaMemcpy(pro, prod, arr_bytes, cudaMemcpyDeviceToHost);
     cudaFree(arr1d); cudaFree(arr2d); cudaFree(prod);
 }
+// Host callee ends.
 
-
+// main executable function.
 int main(void) {
     std::random_device rd; // Obtain a seed from hardware.
     std::mt19937 gen(rd());
