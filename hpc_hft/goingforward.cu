@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <random>
 
-constexpr size_t SIZE = 50;// Compile time constant should be defined like this.
+constexpr size_t SIZE = 70;// Compile time constant should be defined like this.
 constexpr size_t TILE_WIDTH = 2;
 
 __global__ void kernel(double *ad, double *bd, double *pd) {
