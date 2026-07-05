@@ -38,7 +38,7 @@ void print_arr(double *arr) {
         for(size_t j{}; j < SIZE; j++) {
             printf("%lf ", arr[i*SIZE + j]);
         }
-
+        printf("\n");
     }
 }
 
