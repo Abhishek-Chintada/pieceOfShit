@@ -27,6 +27,9 @@ void matrix_math(double *a, double *b, double *p) {
     cudaMemcpy(bd, b, size_in_bytes, cudaMemcpyHostToDevice);
     cudaMalloc((void**)pd, size_in_bytes);
     // matrix_math kernel.
+    dim3 dimGrid(SIZE/TILE_WIDTH, SIZE/TILE_WIDTH);
+    dim3 dimBlock(TILE_WIDTH, TILE_WIDTH);
+    kernel<<<dimGrid, dimBlock>>>(ad, bd, pd);
     cudaMemcpy(p, pd, size_in_bytes, cudaMemcpyDeviceToHost);
 }
 
@@ -44,6 +47,14 @@ int main(void) {
     std::mt19937 gen(rd());
     std::uniform_real_distribution<double> distrib(0.0, 10.0);
     double *a = (double *)malloc(SIZE*SIZE*sizeof(double));
-    double *b = (double *)malloc(SIZE*)
+    double *b = (double *)malloc(SIZE*SIZE*sizeof(double));
+    double *p = (double *)malloc(SIZE*SIZE*sizeof(double));
+    for(size_t i{}; i < SIZE; i++) {
+        for(size_t j{}; j < SIZE; j++) {
+            a[i*SIZE + j] = distrib(gen);
+            b[i*SIZE + j] = distrib(gen);
+            p[i*SIZE + j] = 0;
+        }
+    }
     return 0;
 }
