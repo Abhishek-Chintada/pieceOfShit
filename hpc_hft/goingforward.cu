@@ -13,7 +13,7 @@ __global__ void kernel(double *ad, double *bd, double *pd) {
     for(size_t k {}; k < SIZE; k++) {
         auto a = ad[row*SIZE + k];
         auto b = bd[k*SIZE + column];
-        Pvalue = a*b;
+        Pvalue += a*b;
     }
     pd[row*SIZE + column] = Pvalue;
 }
