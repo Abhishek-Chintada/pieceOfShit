@@ -21,11 +21,11 @@ __global__ void kernel(double *ad, double *bd, double *pd) {
 void matrix_math(double *a, double *b, double *p) {
     double *ad, *bd, *pd;
     size_t size_in_bytes = sizeof(double)*SIZE*SIZE;
-    cudaMalloc((void**)ad, size_in_bytes);
+    cudaMalloc((void**)&ad, size_in_bytes);
     cudaMemcpy(ad, a, size_in_bytes, cudaMemcpyHostToDevice);
-    cudaMalloc((void**)bd, size_in_bytes);
+    cudaMalloc((void**)&bd, size_in_bytes);
     cudaMemcpy(bd, b, size_in_bytes, cudaMemcpyHostToDevice);
-    cudaMalloc((void**)pd, size_in_bytes);
+    cudaMalloc((void**)&pd, size_in_bytes);
     // matrix_math kernel.
     dim3 dimGrid(SIZE/TILE_WIDTH, SIZE/TILE_WIDTH);
     dim3 dimBlock(TILE_WIDTH, TILE_WIDTH);
