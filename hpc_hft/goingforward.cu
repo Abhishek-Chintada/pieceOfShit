@@ -58,5 +58,7 @@ int main(void) {
     }
     print_arr(a);
     print_arr(b);
+    matrix_math(a, b, p);
+    print_arr(p);
     return 0;
 }
