@@ -56,5 +56,7 @@ int main(void) {
             p[i*SIZE + j] = 0;
         }
     }
+    print_arr(a);
+    print_arr(b);
     return 0;
 }
