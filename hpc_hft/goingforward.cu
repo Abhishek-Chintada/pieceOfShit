@@ -63,5 +63,8 @@ int main(void) {
     matrix_math(a, b, p);
     printf("Matrix p\n");
     print_arr(p);
+    free(a);
+    free(b);
+    free(p);
     return 0;
 }
