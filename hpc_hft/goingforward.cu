@@ -56,9 +56,12 @@ int main(void) {
             p[i*SIZE + j] = 0;
         }
     }
+    printf("Matrix a\n");
     print_arr(a);
+    printf("Matrix b\n");
     print_arr(b);
     matrix_math(a, b, p);
+    printf("Matrix p\n");
     print_arr(p);
     return 0;
 }
