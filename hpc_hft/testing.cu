@@ -1,3 +1,4 @@
+#include <cuda_runtime_api.h>
 #include <iostream>
 #include <cmath>
 #include <cuda_runtime.h>
@@ -20,6 +21,8 @@ int main(void) {
     }
 
     add<<<1, 1>>>(N, x, y); // this is run on the CPU
+
+    cudaDeviceSynchronize();
 
     float maxError = 0.0f;
     for(int i = 0; i < N; i++) {
