@@ -50,6 +50,7 @@ void MatrixMultiplication(int* arr1, int* arr2, int* pro, int size) {
 
 // Host callee starts.
 void MatrixMultiplication_Revised(int* arr1, int* arr2, int* pro, size_t size) {
+    cudaFree(0);
     auto arr_bytes = size*size*sizeof(int);
     int *arr1d, *arr2d, *prod;
     cudaMalloc((void**)&arr1d, arr_bytes);
