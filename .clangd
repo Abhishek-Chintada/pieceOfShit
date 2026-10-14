@@ -1,0 +1,11 @@
+CompileFlags:
+  Add:
+    - -xcuda
+    - --cuda-path=/home/abhishekchintada/miniconda3/envs/cudahdr
+    - --cuda-gpu-arch=sm_75
+    - -std=c++17
+  Remove:
+    - -gencode*
+    - --generate-code*
+    - -arch*
+    - --expt*
