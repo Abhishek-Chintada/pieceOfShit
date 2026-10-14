@@ -1,5 +1,5 @@
 #include <cuda_runtime_api.h>
-#include <iostream>
+#include <cstdio.h>
 #include <cmath>
 #include <cuda_runtime.h>
 
@@ -31,7 +31,7 @@ int main(void) {
     for(int i = 0; i < N; i++) {
         maxError = fmax(maxError, fabs(sum[i] - 3.0f));
     }
-    std::cout << "The maximum error is " << maxError << std::endl;
+    printf("The maximum error is %f\n", maxError);
 
     cudaFree(x);
     cudaFree(y);
