@@ -83,8 +83,8 @@ int main(void) {
             arr2[i*size + j] = random(gen);
         }
     }
-    print_arr(arr1, size);
-    print_arr(arr2, size);
+    // print_arr(arr1, size);
+    // print_arr(arr2, size);
     // Carry out the multiplication.
 
     auto start_time = std::chrono::high_resolution_clock::now();
