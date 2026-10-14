@@ -4,6 +4,11 @@
 #include <cuda_runtime.h>
 
 __global__ void add(int n, float *x, float *y) {
+    int index = threadIdx.x;
+    int stride = blockDim.x;
+    for(int i = index; i < n; i += stride) {
+        y[i] = x[i] + y[i];
+    }
     for(int i = 0; i < n; i++) {
         y[i] = x[i] + y[i];
     }
