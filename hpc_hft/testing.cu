@@ -16,6 +16,7 @@ int main(void) {
     float *x, *y, *sum;
     cudaMallocManaged(&x, N*sizeof(float));
     cudaMallocManaged(&y, N*sizeof(float));
+    cudaMallocManaged(&sum, N*sizeof(float));
 
     for(int i {}; i < N; i++) {
         x[i] = 1.0f;
@@ -34,6 +35,7 @@ int main(void) {
 
     cudaFree(x);
     cudaFree(y);
+    cudaFree(sum);
 
     return 0;
 }
