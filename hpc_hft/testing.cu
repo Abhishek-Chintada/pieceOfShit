@@ -1,5 +1,5 @@
 #include <cuda_runtime_api.h>
-#include <cstdio.h>
+#include <cstdio>
 #include <cmath>
 #include <cuda_runtime.h>
 
