@@ -25,7 +25,7 @@ int main(void) {
         y[i] = 2.0f;
     }
 
-    add<<<1, 1>>>(N, x, y); // this is run on the CPU
+    add<<<1, 256>>>(N, x, y); // this is run on the CPU
 
     cudaDeviceSynchronize();
 
