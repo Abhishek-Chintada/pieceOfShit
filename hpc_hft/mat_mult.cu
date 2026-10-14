@@ -89,7 +89,7 @@ int main(void) {
 
     auto start_time = std::chrono::high_resolution_clock::now();
     MatrixMultiplication(arr1, arr2, product, size);
-    print_arr(product, size); // Printing the product here.
+    // print_arr(product, size); // Printing the product here.
     auto end_time = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> time = end_time - start_time;
     printf("This the time taken for normal execution : %lf\n", time.count());
